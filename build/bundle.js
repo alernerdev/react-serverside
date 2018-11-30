@@ -94,7 +94,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _Home = __webpack_require__(/*! ./components/Home */ \"./src/client/components/Home.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function () {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default })\n    );\n};\n\n//# sourceURL=webpack:///./src/client/Routes.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Home = __webpack_require__(/*! ./components/Home */ \"./src/client/components/Home.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nvar _UsersList = __webpack_require__(/*! ./components/UsersList */ \"./src/client/components/UsersList.js\");\n\nvar _UsersList2 = _interopRequireDefault(_UsersList);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*\r\nexport default () => {\r\n    return (\r\n        <div>\r\n            <Route exact path=\"/\" component={Home} />\r\n            <Route path=\"/users\" component={UsersList} />\r\n        </div>\r\n    );\r\n}\r\n*/\n\n// import {Route} from 'react-router-dom';\n\nexports.default = [{\n    path: '/',\n    component: _Home2.default,\n    exact: true\n}, {\n    loadData: _UsersList.loadData,\n    path: '/users',\n    component: _UsersList2.default\n}];\n\n//# sourceURL=webpack:///./src/client/Routes.js?");
+
+/***/ }),
+
+/***/ "./src/client/actions/index.js":
+/*!*************************************!*\
+  !*** ./src/client/actions/index.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.fetchUsers = exports.FETCH_USERS = undefined;\n\nvar _axios = __webpack_require__(/*! axios */ \"axios\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar FETCH_USERS = exports.FETCH_USERS = 'fetch_users';\n\nvar fetchUsers = exports.fetchUsers = function fetchUsers() {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            console.log('inside fetchUsers action creator');\n\n                            _context.next = 3;\n                            return _axios2.default.get('https://react-ssr-api.herokuapp.com/users');\n\n                        case 3:\n                            res = _context.sent;\n\n\n                            dispatch({\n                                type: FETCH_USERS,\n                                payload: res\n                            });\n\n                        case 5:\n                        case 'end':\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined);\n        }));\n\n        return function (_x) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack:///./src/client/actions/index.js?");
 
 /***/ }),
 
@@ -110,6 +122,54 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 
 /***/ }),
 
+/***/ "./src/client/components/UsersList.js":
+/*!********************************************!*\
+  !*** ./src/client/components/UsersList.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.loadData = undefined;\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _actions = __webpack_require__(/*! ../actions */ \"./src/client/actions/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar UsersList = function (_React$Component) {\n    _inherits(UsersList, _React$Component);\n\n    function UsersList() {\n        _classCallCheck(this, UsersList);\n\n        return _possibleConstructorReturn(this, (UsersList.__proto__ || Object.getPrototypeOf(UsersList)).apply(this, arguments));\n    }\n\n    _createClass(UsersList, [{\n        key: 'componentDidMount',\n\n        /* this doesnt get invoked on the server at all - this is a client side lifecycle method */\n        value: function componentDidMount() {\n            console.log('inside componentDidMount for UsersList');\n\n            this.props.fetchUsers();\n        }\n    }, {\n        key: 'render',\n        value: function render() {\n            console.log('inside render for UsersList');\n            return _react2.default.createElement(\n                'div',\n                null,\n                'Here is a big list of users',\n                _react2.default.createElement(\n                    'ul',\n                    null,\n                    this.renderUsers()\n                )\n            );\n        }\n    }, {\n        key: 'renderUsers',\n        value: function renderUsers() {\n            console.log('in renderUsers');\n\n            return this.props.users.map(function (user) {\n                console.log('i am inside renderUsers and user name is ' + user.name);\n                return _react2.default.createElement(\n                    'li',\n                    { key: user.id },\n                    user.name\n                );\n            });\n        }\n    }]);\n\n    return UsersList;\n}(_react2.default.Component);\n\nfunction mapStateToProps(state) {\n    console.log('inside mapToState for UsersList');\n\n    return { users: state.users };\n}\n\n/* this is the function that provides data for this component in order for it to be rendered.\r\nThis is for server side only\r\n*/\nfunction loadData(store) {\n    // manual call of a action creator\n    // not using connect() because it communicates with the Provider.  We want to work with redux\n    // before rendering anything\n    return store.dispatch((0, _actions.fetchUsers)());\n}\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UsersList);\nexports.loadData = loadData;\n\n//# sourceURL=webpack:///./src/client/components/UsersList.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/index.js":
+/*!**************************************!*\
+  !*** ./src/client/reducers/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _usersReducer = __webpack_require__(/*! ./usersReducer */ \"./src/client/reducers/usersReducer.js\");\n\nvar _usersReducer2 = _interopRequireDefault(_usersReducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = (0, _redux.combineReducers)({\n    users: _usersReducer2.default\n});\n\n//# sourceURL=webpack:///./src/client/reducers/index.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/usersReducer.js":
+/*!*********************************************!*\
+  !*** ./src/client/reducers/usersReducer.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _actions = __webpack_require__(/*! ../actions */ \"./src/client/actions/index.js\");\n\nexports.default = function () {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n    var action = arguments[1];\n\n    switch (action.type) {\n        case _actions.FETCH_USERS:\n            console.log('inside FETCH_USERS reducer.  Returning data' + action.payload.data);\n            return action.payload.data;\n\n        default:\n            return state;\n    }\n};\n\n//# sourceURL=webpack:///./src/client/reducers/usersReducer.js?");
+
+/***/ }),
+
+/***/ "./src/helpers/createStore.js":
+/*!************************************!*\
+  !*** ./src/helpers/createStore.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducers = __webpack_require__(/*! ../client/reducers */ \"./src/client/reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function () {\n    var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));\n\n    return store;\n};\n\n//# sourceURL=webpack:///./src/helpers/createStore.js?");
+
+/***/ }),
+
 /***/ "./src/helpers/renderer.js":
 /*!*********************************!*\
   !*** ./src/helpers/renderer.js ***!
@@ -118,7 +178,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _Routes = __webpack_require__(/*! ../client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/* BrowserRouter does not work on the server side. Static Router needs to be told what\r\ncomponent to render based on the request url */\nexports.default = function (req) {\n\n    var content = (0, _server.renderToString)(_react2.default.createElement(\n        _reactRouterDom.StaticRouter,\n        { location: req.path, context: {} },\n        _react2.default.createElement(_Routes2.default, null)\n    ));\n\n    return '\\n        <html>\\n            <head></head>\\n            <body>\\n                <div id=\"root\">' + content + '</div>\\n                <script src=\"bundle.js\"></script>\\n            </body>\\n        </html>\\n    ';\n};\n\n//# sourceURL=webpack:///./src/helpers/renderer.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _Routes = __webpack_require__(/*! ../client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/* BrowserRouter does not work on the server side. Static Router needs to be told what\r\ncomponent to render based on the request url\r\n\r\nAnd the trick here is that we figure out what components need to be rendered WITHOUT rendering them\r\n*/\nexports.default = function (req, store) {\n\n    var content = (0, _server.renderToString)(_react2.default.createElement(\n        _reactRedux.Provider,\n        { store: store },\n        _react2.default.createElement(\n            _reactRouterDom.StaticRouter,\n            { location: req.path, context: {} },\n            _react2.default.createElement(\n                'div',\n                null,\n                (0, _reactRouterConfig.renderRoutes)(_Routes2.default)\n            )\n        )\n    ));\n\n    console.log('rendered content is ' + content);\n\n    /* this data is rendered and returned instantly -- its not waiting for any remote async calls */\n    return '\\n        <html>\\n            <head></head>\\n            <body>\\n                <div id=\"root\">' + content + '</div>\\n                <script src=\"bundle.js\"></script>\\n            </body>\\n        </html>\\n    ';\n}; // this is Routes array\n// this library helps to figure out what components need to be rendered on the server side\n// without actually rendering those components\n\n//# sourceURL=webpack:///./src/helpers/renderer.js?");
 
 /***/ }),
 
@@ -130,7 +190,29 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _renderer = __webpack_require__(/*! ./helpers/renderer */ \"./src/helpers/renderer.js\");\n\nvar _renderer2 = _interopRequireDefault(_renderer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// CommonJS syntax\n// const express = require('express');\n// const React = require('react');\n// const renderToString = require('react-dom/server').renderToString;\n// const Home = require('./client/components/Home').default;\n\n// Module 2015 syntax\nvar app = (0, _express2.default)();\napp.use(_express2.default.static('public'));\n\napp.get('/', function (req, res) {\n    var html = (0, _renderer2.default)(req);\n    res.send(html);\n});\n\napp.listen(3000, function () {\n    console.log('listening on port 3000');\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\n__webpack_require__(/*! babel-polyfill */ \"babel-polyfill\");\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _Routes = __webpack_require__(/*! ./client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _renderer = __webpack_require__(/*! ./helpers/renderer */ \"./src/helpers/renderer.js\");\n\nvar _renderer2 = _interopRequireDefault(_renderer);\n\nvar _createStore = __webpack_require__(/*! ./helpers/createStore */ \"./src/helpers/createStore.js\");\n\nvar _createStore2 = _interopRequireDefault(_createStore);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// CommonJS syntax\n// const express = require('express');\n// const React = require('react');\n// const renderToString = require('react-dom/server').renderToString;\n// const Home = require('./client/components/Home').default;\n\n// Module 2015 syntax\nvar app = (0, _express2.default)();\n\n// store is created way before we try to render anything\n\n\n// this library helps to figure out what components need to be rendered on the server side\n// without actually rendering those components\n\napp.use(_express2.default.static('public'));\n\napp.get('*', function (req, res) {\n    var store = (0, _createStore2.default)();\n\n    // take incoming request url path and figure out what component is to be rendered\n    // 'Routes' is an array of routes\n    var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path);\n    promises.map(function (obj) {\n        // call the function which is responsible for populating component with \n        // data needed for server side rendeing\n        // this returns promises for all the async actions fired off\n        return obj.route.loadData ? obj.route.loadData(store) : null;\n    });\n\n    Promise.all(promises).then(function () {\n        console.log(\"all promises got resolved\");\n\n        var html = (0, _renderer2.default)(req, store);\n        console.log('HTML ->  ' + html);\n        res.send(html);\n    });\n});\n\napp.listen(3000, function () {\n    console.log('listening on port 3000');\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"axios\");\n\n//# sourceURL=webpack:///external_%22axios%22?");
+
+/***/ }),
+
+/***/ "babel-polyfill":
+/*!*********************************!*\
+  !*** external "babel-polyfill" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-polyfill\");\n\n//# sourceURL=webpack:///external_%22babel-polyfill%22?");
 
 /***/ }),
 
@@ -167,6 +249,28 @@ eval("module.exports = require(\"react-dom/server\");\n\n//# sourceURL=webpack:/
 
 /***/ }),
 
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-redux\");\n\n//# sourceURL=webpack:///external_%22react-redux%22?");
+
+/***/ }),
+
+/***/ "react-router-config":
+/*!**************************************!*\
+  !*** external "react-router-config" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-router-config\");\n\n//# sourceURL=webpack:///external_%22react-router-config%22?");
+
+/***/ }),
+
 /***/ "react-router-dom":
 /*!***********************************!*\
   !*** external "react-router-dom" ***!
@@ -175,6 +279,28 @@ eval("module.exports = require(\"react-dom/server\");\n\n//# sourceURL=webpack:/
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"react-router-dom\");\n\n//# sourceURL=webpack:///external_%22react-router-dom%22?");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"redux\");\n\n//# sourceURL=webpack:///external_%22redux%22?");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"redux-thunk\");\n\n//# sourceURL=webpack:///external_%22redux-thunk%22?");
 
 /***/ })
 
