@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 
 class UsersList extends React.Component {
-    /* this doesnt get invoked on the server at all - this is a client side lifecycle method */
+    /* this doesnt get invoked on the server at all - this is a client side lifecycle method
+    even though we generate state on the server side and send it to the client, we still cant delete this code
+    because if the user navigates to a different page and bypasses /users altogether and then goes to /users then
+    the relevant server side code will never have run and this fetching will be triggered on the client side*/
     componentDidMount() {
         console.log('inside componentDidMount for UsersList');
 
@@ -26,7 +29,6 @@ class UsersList extends React.Component {
         console.log(`in renderUsers`);
 
         return this.props.users.map( (user) => {
-            console.log(`i am inside renderUsers and user name is ${user.name}`);
             return <li key={user.id}>{user.name}</li>
         });
     }
@@ -43,10 +45,13 @@ This is for server side only
 */
 function loadData(store) {
     // manual call of a action creator
-    // not using connect() because it communicates with the Provider.  We want to work with redux
-    // before rendering anything
+    // not using connect() because it communicates with the Provider.  
+    // We want to work with redux before rendering anything
     return store.dispatch(fetchUsers());
 }
 
-export default connect(mapStateToProps, {fetchUsers})(UsersList);
-export { loadData };
+// connect function works with the Provider which has a reference to the store
+export default {
+    component: connect(mapStateToProps, {fetchUsers})(UsersList),
+    loadData: loadData
+}

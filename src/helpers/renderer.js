@@ -2,6 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import serialize from 'serialize-javascript'; // library to scrub JSON from javascript
 
 import Routes from '../client/Routes'; // this is Routes array
 // this library helps to figure out what components need to be rendered on the server side
@@ -24,14 +25,19 @@ export default (req, store) => {
         </Provider>
     );
 
-    console.log(`rendered content is ${content}`);
-    
+    /* the server side state gets sent to the client as raw data so the client side state is initialuzed 
+    from it. Otherwise, client side state is blank initially and the page blanks oit for a second
+    */
     /* this data is rendered and returned instantly -- its not waiting for any remote async calls */
+    /* need to be security careful about dumping store state into HTML -- it might contain javascript !! */
     return `
         <html>
             <head></head>
             <body>
                 <div id="root">${content}</div>
+                <script>
+                    window.INITIAL_STATE=${serialize(store.getState())}
+                </script>
                 <script src="bundle.js"></script>
             </body>
         </html>

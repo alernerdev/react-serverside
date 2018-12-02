@@ -7,6 +7,7 @@
 // Module 2015 syntax
 import 'babel-polyfill';
 import express from 'express';
+import chalk from 'chalk';
 
 import Routes from './client/Routes';
 
@@ -29,8 +30,7 @@ app.get('*', (req, res) => {
 
     // take incoming request url path and figure out what component is to be rendered
     // 'Routes' is an array of routes
-    const promises = matchRoutes(Routes, req.path);
-    promises.map( ( obj )=> {
+    const promises = matchRoutes(Routes, req.path).map(( obj )=> {
         // call the function which is responsible for populating component with 
         // data needed for server side rendeing
         // this returns promises for all the async actions fired off
@@ -38,15 +38,13 @@ app.get('*', (req, res) => {
     });
 
     Promise.all(promises).then( () => {
-        console.log("all promises got resolved");
-
         const html = renderer(req, store);
-        console.log(`HTML ->  ${html}`);
+        console.log(chalk.yellow(html));
         res.send(html);  
     });
 });
 
 
 app.listen(3000, () => {
-    console.log('listening on port 3000');
+    console.log(chalk.blue('listening on port 3000'));
 });

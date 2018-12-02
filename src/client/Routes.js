@@ -1,8 +1,9 @@
 import React from 'react';
 // import {Route} from 'react-router-dom';
 
-import Home from './components/Home';
-import UsersList, { loadData} from './components/UsersList';
+// these imports are objects with properties
+import HomePage from './pages/HomePage';
+import UsersListPage from './pages/UsersListPage';
 
 /*
 export default () => {
@@ -15,15 +16,16 @@ export default () => {
 }
 */
 
+// could be using spread operator here (like ...HomePage), but spelling it out instead of readability
 export default [
     {
         path: '/',
-        component: Home,
+        component: HomePage.component,
         exact: true
     },
     {
-        loadData: loadData,
         path: '/users',
-        component: UsersList
+        component: UsersListPage.component,
+        loadData: UsersListPage.loadData
     }
 ];
