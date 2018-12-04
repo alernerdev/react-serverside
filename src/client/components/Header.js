@@ -1,0 +1,31 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const Header = ({ auth }) => {
+    console.log(`my auth status is ${auth}`);
+    const authButton = auth ? 
+        (
+            <a href="/api/logout">Logout</a>
+        ) :
+        (
+            <a href="/api/auth/google">Login</a>
+        );
+
+    return (
+        <div>
+            <Link to="/">ReactServerSide</Link>
+            <div>
+                <Link to="/users">Users</Link>
+                <Link to="/admins">Admins</Link>
+                {authButton}
+            </div>
+        </div>
+    );
+}
+
+function mapStateToProps(state) {
+    return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)(Header);
